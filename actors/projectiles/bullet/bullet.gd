@@ -6,7 +6,7 @@ onready var verticalTexture = load("res://assets/sprites/projectiles/bullet/bull
 
 var direction
 
-const SPEED = 300
+const SPEED = 500
 
 func _ready():
 	self.direction = get_parent().direction
