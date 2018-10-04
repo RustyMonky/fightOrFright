@@ -3,7 +3,7 @@
 [ext_resource path="res://actors/timmy/timmy.gd" type="Script" id=1]
 [ext_resource path="res://assets/spriteFrames/timmy/timmyWalk.tres" type="SpriteFrames" id=2]
 
-[node name="timmy" type="KinematicBody2D"]
+[node name="timmy" type="KinematicBody2D" index="0"]
 
 input_pickable = false
 collision_layer = 1
