@@ -41,14 +41,14 @@ func _input(event):
 
 func fire():
 	var bulletInstance = load("res://actors/projectiles/bullet/bullet.tscn").instance()
-	self.add_child(bulletInstance)
 
 	# Unfortunately, bullet position is hard set so that it exits the gun sprite
 	if (self.direction.x < 1):
-		bulletInstance.position = Vector2(-14, 11)
+		bulletInstance.position = self.position + Vector2(-14, 16)
 	else:
-		bulletInstance.position = Vector2(14, 11)
+		bulletInstance.position = self.position + Vector2(14, 16)
 	bulletInstance.direction = self.direction
+	get_parent().add_child(bulletInstance)
 
 func move_timmy():
 	currentState = STATE.MOVING
