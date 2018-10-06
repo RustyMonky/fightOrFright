@@ -18,4 +18,10 @@ frames = ExtResource( 2 )
 animation = "timmyWalk"
 _sections_unfolded = [ "Transform" ]
 
+[node name="collider" type="CollisionPolygon2D" parent="." index="1"]
+
+build_mode = 0
+polygon = PoolVector2Array( -14.2181, -6.34605, -14.2181, -6.34605, -7.02144, -23.4381, 6.60081, -23.1811, 11.8698, -12.6431, 13.669, -4.41837, 13.669, 0.465076, 9.04253, 5.99109, 9.04253, 12.6737, 6.21527, 17.9427, 5.05867, 29.7658, -4.06567, 30.0228, -3.93716, 26.1674, -1.1099, 24.1112, -2.78055, 17.5571, -10.2342, 15.758, -13.19, 12.8022, -12.933, 9.20388 )
+_sections_unfolded = [ "Z Index" ]
+
 

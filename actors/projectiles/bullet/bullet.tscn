@@ -1,19 +1,17 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://actors/projectiles/bullet/bullet.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/projectiles/bullet/bulletHoriz.png" type="Texture" id=2]
 
-[sub_resource type="ConvexPolygonShape2D" id=1]
+[node name="bullet" type="Area2D"]
 
-custom_solver_bias = 0.0
-points = PoolVector2Array( 0, -10, 8.66025, 5, -8.66025, 5 )
-
-[node name="bullet" type="KinematicBody2D"]
-
-input_pickable = false
-collision_layer = 1
-collision_mask = 1
-collision/safe_margin = 0.08
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
 script = ExtResource( 1 )
 _sections_unfolded = [ "Collision", "Transform" ]
 
@@ -22,11 +20,14 @@ _sections_unfolded = [ "Collision", "Transform" ]
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="CollisionPolygon2D" type="CollisionShape2D" parent="." index="1"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="1"]
 
 rotation = -1.5708
 scale = Vector2( 0.5, 0.5 )
-shape = SubResource( 1 )
-_sections_unfolded = [ "Transform" ]
+build_mode = 0
+polygon = PoolVector2Array( 3.95025, -1.85655, 3.95023, 3.82829, -3.93519, 4.01164, -3.9963, -1.9177, -1.97909, -3.87377, 1.87193, -3.99601 )
+_sections_unfolded = [ "Transform", "Z Index" ]
+
+[connection signal="body_entered" from="." to="." method="_on_bullet_body_entered"]
 
 
