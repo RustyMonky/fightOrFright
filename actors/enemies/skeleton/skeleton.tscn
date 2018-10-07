@@ -18,13 +18,34 @@ _sections_unfolded = [ "Visibility" ]
 
 frames = ExtResource( 2 )
 animation = "skeletonMove"
-frame = 1
-playing = true
+frame = 3
 
 [node name="collider" type="CollisionPolygon2D" parent="." index="1"]
 
 build_mode = 0
 polygon = PoolVector2Array( -16.2312, -18.925, -10.0554, -24.1587, -7.01986, -24.9961, 6.7971, -24.8914, 9.93732, -24.1587, 14.857, -20.0764, 14.9617, -14.11, 13.1822, -12.6446, 12.8682, -3.11922, 10.9841, -1.02574, 10.9841, 4.836, 9.30928, 5.98741, 0.0979691, 9.651, -0.216057, 15.5127, 7.63449, 29.335, -9.63671, 29.5444, -3.35627, 14.9947, -2.8329, 9.97036, -7.12453, 5.88807, -7.12453, 1.70111, -1.99551, -1.02041, -1.99551, -3.11389, -7.96193, -8.94473, -7.96193, -11.9803, -12.9863, -12.0849, -16.3358, -15.8532 )
 _sections_unfolded = [ "Transform", "Z Index" ]
+
+[node name="fadeTimer" type="Timer" parent="." index="2"]
+
+process_mode = 1
+wait_time = 3.0
+one_shot = true
+autostart = false
+
+[node name="fadeTween" type="Tween" parent="." index="3"]
+
+repeat = false
+playback_process_mode = 1
+playback_speed = 1.0
+playback/active = false
+playback/repeat = false
+playback/speed = 1.0
+
+[connection signal="animation_finished" from="animations" to="." method="_on_animations_animation_finished" flags=3]
+
+[connection signal="timeout" from="fadeTimer" to="." method="_on_fadeTimer_timeout"]
+
+[connection signal="tween_completed" from="fadeTween" to="." method="_on_fadeTween_tween_completed"]
 
 
