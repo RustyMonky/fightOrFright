@@ -1,10 +1,11 @@
 extends KinematicBody2D
 
-enum STATE { REST, MOVING }
+enum STATE { REST, MOVING, DEAD }
 
 onready var animations = $animations
 var currentState = STATE.REST
 var direction = Vector2(0, 0)
+var hp = 3
 const SPEED = 2
 
 func _ready():
@@ -12,6 +13,9 @@ func _ready():
 	set_process_input(true)
 
 func _process(delta):
+	if currentState == STATE.DEAD:
+		return
+
 	if Input.is_action_pressed("ui_up"):
 		self.direction = Vector2(0, -1)
 		move_timmy()
@@ -53,7 +57,9 @@ func fire():
 
 func move_timmy():
 	currentState = STATE.MOVING
-	self.move_and_collide(direction * SPEED)
+	var collision = self.move_and_collide(direction * SPEED)
+	if (collision && collision.collider.is_in_group("enemies")):
+		take_damage()
 
 	# Check change in direction to update animation flip
 	if direction.x == 1:
@@ -62,3 +68,15 @@ func move_timmy():
 		animations.flip_h = false
 
 	animations.play()
+
+func take_damage():
+	hp -= 1
+	if hp <= 0:
+		currentState = STATE.DEAD
+		var deathAnimation = load("res://assets/spriteFrames/timmy/timmyDeath.tres")
+		animations.set_sprite_frames(deathAnimation)
+		animations.set_animation("timmyDeath")
+
+func _on_animations_animation_finished():
+	if currentState == STATE.DEAD:
+		animations.stop()
