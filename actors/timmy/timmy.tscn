@@ -4,7 +4,9 @@
 [ext_resource path="res://assets/spriteFrames/timmy/timmyWalk.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://assets/animations/timmy/timmyDamaged.tres" type="Animation" id=3]
 
-[node name="timmy" type="KinematicBody2D" index="0"]
+[node name="timmy" type="KinematicBody2D" groups=[
+"timmy",
+]]
 
 input_pickable = false
 collision_layer = 1

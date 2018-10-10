@@ -1,0 +1,16 @@
+[gd_resource type="SpriteFrames" load_steps=5 format=2]
+
+[ext_resource path="res://assets/sprites/enemies/skeleton/attack/skeleton-attack1.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/enemies/skeleton/attack/skeleton-attack2.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/enemies/skeleton/attack/skeleton-attack3.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/enemies/skeleton/attack/skeleton-attack4.png" type="Texture" id=4]
+
+[resource]
+
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ],
+"loop": false,
+"name": "skeletonAttack",
+"speed": 12.0
+} ]
+
