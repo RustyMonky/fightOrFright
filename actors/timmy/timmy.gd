@@ -3,9 +3,14 @@ extends KinematicBody2D
 enum STATE { REST, MOVING, DEAD }
 
 onready var animations = $animations
+onready var animationPlayer = $animationPlayer
+onready var invincibleTimer = $invincibleTimer
+
 var currentState = STATE.REST
 var direction = Vector2(0, 0)
-var hp = 3
+var hp = 4
+var isInvincible = false
+
 const SPEED = 2
 
 func _ready():
@@ -70,13 +75,25 @@ func move_timmy():
 	animations.play()
 
 func take_damage():
+	if isInvincible:
+		return
+
 	hp -= 1
+
 	if hp <= 0:
 		currentState = STATE.DEAD
 		var deathAnimation = load("res://assets/spriteFrames/timmy/timmyDeath.tres")
 		animations.set_sprite_frames(deathAnimation)
 		animations.set_animation("timmyDeath")
+	else:
+		isInvincible = true
+		invincibleTimer.start()
+		animationPlayer.play("timmyDamaged")
 
 func _on_animations_animation_finished():
 	if currentState == STATE.DEAD:
 		animations.stop()
+
+func _on_invincibleTimer_timeout():
+	isInvincible = false
+	animationPlayer.stop()
