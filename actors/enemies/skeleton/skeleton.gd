@@ -1,13 +1,14 @@
 extends KinematicBody2D
 
-enum STATE {ALIVE, DEAD}
+enum STATE {ALIVE, FOLLOW, DEAD}
 
 onready var animations = $animations
 onready var collider = $collider
 onready var fadeTimer = $fadeTimer
 onready var fadeTween = $fadeTween
+onready var timmy = get_parent().get_node("timmy")
 
-var current_state = STATE.ALIVE
+var currentState = STATE.ALIVE
 var direction
 var hp = 2
 
@@ -18,13 +19,25 @@ func _ready():
 	set_physics_process(true)
 
 func _physics_process(delta):
-	if current_state == STATE.ALIVE:
-		self.global_position += self.direction.normalized() * SPEED * delta
+	if currentState == STATE.ALIVE:
+		self.move_and_collide(self.direction.normalized() * SPEED * delta)
+	elif currentState == STATE.FOLLOW:
+		if self.global_position.y < timmy.position.y:
+			self.direction.y = 1
+		elif self.global_position.y > timmy.position.y:
+			self.direction.y = -1
+		elif self.global_position.y == timmy.position.y:
+			self.direction.y = 0
+
+		self.move_and_collide(self.direction.normalized() * SPEED * delta)
+
+func move_to_timmy():
+	currentState = STATE.FOLLOW
 
 func take_damage():
 	hp -= 1
 	if hp == 0:
-		current_state = STATE.DEAD
+		currentState = STATE.DEAD
 		collider.disabled = true
 		self.z_index = -1
 
@@ -33,7 +46,7 @@ func take_damage():
 		animations.set_animation("skeletonDeath")
 
 func _on_animations_animation_finished():
-	if current_state == STATE.DEAD:
+	if currentState == STATE.DEAD:
 		fadeTimer.start()
 
 func _on_fadeTimer_timeout():
@@ -41,5 +54,4 @@ func _on_fadeTimer_timeout():
 	fadeTween.start()
 
 func _on_fadeTween_tween_completed(object, key):
-
 	self.queue_free()
