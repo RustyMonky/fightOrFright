@@ -23,11 +23,9 @@ func _ready():
 	set_process(true)
 
 func _process(delta):
-	if ray.is_colliding():
+	if ray.is_colliding() && can_hit_timmy():
 		if ray.get_collider().is_in_group("timmy"):
-			currentState = STATE.ATTACK
-			animations.set_sprite_frames(attackAnimation)
-			animations.set_animation("skeletonAttack")
+			attack()
 
 func _physics_process(delta):
 	if currentState == STATE.ALIVE:
@@ -40,7 +38,26 @@ func _physics_process(delta):
 		elif self.global_position.y == timmy.position.y:
 			self.direction.y = 0
 
+		if animations.flip_h && timmy.position.x > self.position.x:
+			animations.flip_h = false
+			self.direction.x = 1
+		elif !animations.flip_h && timmy.position.x < self.position.x:
+			animations.flip_h = true
+			self.direction.x = -1
+
 		self.move_and_collide(self.direction.normalized() * SPEED * delta)
+
+func attack():
+	currentState = STATE.ATTACK
+	animations.set_sprite_frames(attackAnimation)
+	animations.set_animation("skeletonAttack")
+	timmy.take_damage()
+
+func can_hit_timmy():
+	if animations.flip_h:
+		return timmy.position.x - self.position.x <= 32
+	else:
+		return self.position.x - timmy.position.x <= 32
 
 func move_to_timmy():
 	currentState = STATE.FOLLOW

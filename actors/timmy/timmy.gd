@@ -40,6 +40,9 @@ func _process(delta):
 			animations.set_frame(0)
 
 func _input(event):
+	if currentState == STATE.DEAD:
+		return
+
 	# Bullet functionality does not depend on MOVING or REST states
 	if event.is_action_pressed("ui_select"):
 		fire()
