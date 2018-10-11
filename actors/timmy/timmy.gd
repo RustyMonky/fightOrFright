@@ -4,10 +4,12 @@ enum STATE { REST, MOVING, DEAD }
 
 onready var animations = $animations
 onready var animationPlayer = $animationPlayer
+onready var collider = $collider
 onready var invincibleTimer = $invincibleTimer
 
 var currentState = STATE.REST
 var direction = Vector2(0, 0)
+var fear = 0
 var hp = 4
 var isInvincible = false
 
@@ -20,6 +22,10 @@ func _ready():
 func _process(delta):
 	if currentState == STATE.DEAD:
 		return
+
+	if fear >= 100:
+		hp = 0
+		take_damage()
 
 	if Input.is_action_pressed("ui_up"):
 		self.direction = Vector2(0, -1)
@@ -51,6 +57,12 @@ func _input(event):
 		if event.is_action_released("ui_up") || event.is_action_released("ui_down") || event.is_action_released("ui_left") || event.is_action_released("ui_right"):
 			currentState = STATE.REST
 
+func die():
+	currentState = STATE.DEAD
+	var deathAnimation = load("res://assets/spriteFrames/timmy/timmyDeath.tres")
+	animations.set_sprite_frames(deathAnimation)
+	animations.set_animation("timmyDeath")
+
 func fire():
 	var bulletInstance = load("res://actors/projectiles/bullet/bullet.tscn").instance()
 
@@ -65,6 +77,16 @@ func fire():
 
 func move_timmy():
 	currentState = STATE.MOVING
+	if self.global_position.y + 32 > 360 && self.direction.y == 1:
+		self.direction.y = 0
+	elif self.global_position.y - 32 < 0 && self.direction.y == -1:
+		self.direction.y = 0
+
+	if self.global_position.x - 16 < 0 && self.direction.x == -1:
+		self.direction.x = 0
+	elif self.global_position.x + 16 > 640 && self.direction.x == 1:
+		self.direction.x = 0
+
 	var collision = self.move_and_collide(direction * SPEED)
 	if (collision && collision.collider.is_in_group("enemies")):
 		take_damage()
@@ -84,12 +106,10 @@ func take_damage():
 	hp -= 1
 
 	if hp <= 0:
-		currentState = STATE.DEAD
-		var deathAnimation = load("res://assets/spriteFrames/timmy/timmyDeath.tres")
-		animations.set_sprite_frames(deathAnimation)
-		animations.set_animation("timmyDeath")
+		die()
 	else:
 		isInvincible = true
+		collider.disabled = true
 		invincibleTimer.start()
 		animationPlayer.play("timmyDamaged")
 
@@ -99,4 +119,13 @@ func _on_animations_animation_finished():
 
 func _on_invincibleTimer_timeout():
 	isInvincible = false
+	collider.disabled = false
 	animationPlayer.stop()
+
+func _on_fearRange_body_entered(body):
+	if currentState == STATE.DEAD:
+		return
+
+	if body.is_in_group("enemies"):
+		fear += 5
+		print("Timmy's fear is " + String(fear))

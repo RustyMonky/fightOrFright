@@ -3,7 +3,7 @@
 [ext_resource path="res://actors/enemies/skeleton/skeleton.gd" type="Script" id=1]
 [ext_resource path="res://assets/spriteFrames/enemies/skeleton/skeletonWalk.tres" type="SpriteFrames" id=2]
 
-[node name="skeleton" type="KinematicBody2D" index="0" groups=[
+[node name="skeleton" type="KinematicBody2D" groups=[
 "enemies",
 ]]
 

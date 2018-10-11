@@ -1,10 +1,15 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://actors/timmy/timmy.gd" type="Script" id=1]
 [ext_resource path="res://assets/spriteFrames/timmy/timmyWalk.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://assets/animations/timmy/timmyDamaged.tres" type="Animation" id=3]
 
-[node name="timmy" type="KinematicBody2D" groups=[
+[sub_resource type="CircleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 110.0
+
+[node name="timmy" type="KinematicBody2D" index="0" groups=[
 "timmy",
 ]]
 
@@ -46,8 +51,25 @@ anims/timmyDeath = ExtResource( 3 )
 blend_times = [  ]
 _sections_unfolded = [ "Playback Options" ]
 
+[node name="fearRange" type="Area2D" parent="." index="4"]
+
+editor/display_folded = true
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="fearCollider" type="CollisionShape2D" parent="fearRange" index="0"]
+
+shape = SubResource( 1 )
+
 [connection signal="animation_finished" from="animations" to="." method="_on_animations_animation_finished"]
 
 [connection signal="timeout" from="invincibleTimer" to="." method="_on_invincibleTimer_timeout"]
+
+[connection signal="body_entered" from="fearRange" to="." method="_on_fearRange_body_entered"]
 
 

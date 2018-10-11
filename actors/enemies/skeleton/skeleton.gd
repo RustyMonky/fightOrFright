@@ -24,7 +24,7 @@ func _ready():
 
 func _process(delta):
 	if ray.is_colliding() && can_hit_timmy():
-		if ray.get_collider().is_in_group("timmy"):
+		if ray.get_collider() && ray.get_collider().is_in_group("timmy"):
 			attack()
 
 func _physics_process(delta):
@@ -68,6 +68,10 @@ func take_damage():
 		currentState = STATE.DEAD
 		collider.disabled = true
 		self.z_index = -1
+		if timmy.fear > 0:
+			timmy.fear -= 1
+
+		print("Timmy's fear is " + String(timmy.fear))
 
 		var deathAnimation = load("res://assets/spriteFrames/enemies/skeleton/skeletonDeath.tres")
 		animations.set_sprite_frames(deathAnimation)
