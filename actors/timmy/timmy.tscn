@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://actors/timmy/timmy.gd" type="Script" id=1]
 [ext_resource path="res://assets/spriteFrames/timmy/timmyWalk.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://assets/animations/timmy/timmyDamaged.tres" type="Animation" id=3]
+[ext_resource path="res://assets/sprites/light/timmy-light.png" type="Texture" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -65,6 +66,40 @@ audio_bus_name = "Master"
 [node name="fearCollider" type="CollisionShape2D" parent="fearRange" index="0"]
 
 shape = SubResource( 1 )
+
+[node name="light" type="Light2D" parent="." index="5"]
+
+enabled = true
+editor_only = false
+texture = ExtResource( 4 )
+offset = Vector2( 0, 0 )
+texture_scale = 1.0
+color = Color( 1, 1, 1, 1 )
+energy = 1.0
+mode = 0
+range_height = 0.0
+range_z_min = -1024
+range_z_max = 1024
+range_layer_min = 0
+range_layer_max = 0
+range_item_cull_mask = 1
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 1 )
+shadow_buffer_size = 2048
+shadow_gradient_length = 0.0
+shadow_filter = 0
+shadow_filter_smooth = 0.0
+shadow_item_cull_mask = 1
+_sections_unfolded = [ "Range", "Shadow", "Transform" ]
+
+[node name="lightTween" type="Tween" parent="." index="6"]
+
+repeat = false
+playback_process_mode = 1
+playback_speed = 1.0
+playback/active = false
+playback/repeat = false
+playback/speed = 1.0
 
 [connection signal="animation_finished" from="animations" to="." method="_on_animations_animation_finished"]
 

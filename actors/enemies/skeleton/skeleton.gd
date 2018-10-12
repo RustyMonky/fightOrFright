@@ -55,7 +55,7 @@ func take_damage():
 		collider.disabled = true
 		self.z_index = -1
 		if timmy.fear > 0:
-			timmy.fear -= 1
+			timmy.update_fear(-1)
 
 		print("Timmy's fear is " + String(timmy.fear))
 

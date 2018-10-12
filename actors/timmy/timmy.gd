@@ -6,6 +6,8 @@ onready var animations = $animations
 onready var animationPlayer = $animationPlayer
 onready var collider = $collider
 onready var invincibleTimer = $invincibleTimer
+onready var light = $light
+onready var lightTween = $lightTween
 
 var currentState = STATE.REST
 var direction = Vector2(0, 0)
@@ -104,7 +106,7 @@ func take_damage():
 	if isInvincible:
 		return
 
-	fear += 25
+	update_fear(25)
 
 	if fear >= 100:
 		die()
@@ -113,6 +115,21 @@ func take_damage():
 		collider.disabled = true
 		invincibleTimer.start()
 		animationPlayer.play("timmyDamaged")
+
+func update_fear(changeInt):
+	fear += changeInt
+
+	var newScale
+
+	if changeInt < 0 && light.texture_scale < 1:
+		newScale = light.texture_scale + float(fear * 0.01)
+	else:
+		newScale = light.texture_scale - float(fear * 0.01)
+	if !newScale:
+		return
+
+	lightTween.interpolate_property(light, "texture_scale", light.texture_scale, newScale, 0.5, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	lightTween.start()
 
 func _on_animations_animation_finished():
 	if currentState == STATE.DEAD:
@@ -128,5 +145,5 @@ func _on_fearRange_body_entered(body):
 		return
 
 	if body.is_in_group("enemies"):
-		fear += 5
+		update_fear(5)
 		print("Timmy's fear is " + String(fear))

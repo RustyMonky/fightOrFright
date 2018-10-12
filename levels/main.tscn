@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://levels/main.gd" type="Script" id=1]
 [ext_resource path="res://actors/timmy/timmy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://actors/enemies/spawner.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/sprites/level/background.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -22,6 +23,7 @@ _sections_unfolded = [ "Collision", "Material", "Pickable", "Transform", "Visibi
 
 [node name="triggerZoneLeft" type="Area2D" parent="." index="2"]
 
+editor/display_folded = true
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -39,6 +41,7 @@ _sections_unfolded = [ "Transform", "Visibility" ]
 
 [node name="triggerZoneRight" type="Area2D" parent="." index="3"]
 
+editor/display_folded = true
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -53,6 +56,18 @@ _sections_unfolded = [ "Transform" ]
 position = Vector2( 540, 180 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform", "Visibility" ]
+
+[node name="background" type="Sprite" parent="." index="4"]
+
+show_behind_parent = true
+texture = ExtResource( 4 )
+centered = false
+_sections_unfolded = [ "Offset", "Visibility" ]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." index="5"]
+
+color = Color( 0.27451, 0.27451, 0.27451, 1 )
+_sections_unfolded = [ "Visibility" ]
 
 [connection signal="body_entered" from="triggerZoneLeft" to="." method="_on_triggerZone_body_entered"]
 
