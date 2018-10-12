@@ -2,7 +2,7 @@
 
 [ext_resource path="res://actors/enemies/spawner.gd" type="Script" id=1]
 
-[node name="spawner" type="Node" index="0"]
+[node name="spawner" type="Node"]
 
 script = ExtResource( 1 )
 
@@ -13,6 +13,15 @@ wait_time = 1.0
 one_shot = false
 autostart = true
 
+[node name="changeTimer" type="Timer" parent="." index="1"]
+
+process_mode = 1
+wait_time = 30.0
+one_shot = false
+autostart = true
+
 [connection signal="timeout" from="spawnTimer" to="." method="_on_spawnTimer_timeout"]
+
+[connection signal="timeout" from="changeTimer" to="." method="_on_changeTimer_timeout"]
 
 
