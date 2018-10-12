@@ -10,7 +10,6 @@ onready var invincibleTimer = $invincibleTimer
 var currentState = STATE.REST
 var direction = Vector2(0, 0)
 var fear = 0
-var hp = 4
 var isInvincible = false
 
 const SPEED = 2
@@ -24,8 +23,7 @@ func _process(delta):
 		return
 
 	if fear >= 100:
-		hp = 0
-		take_damage()
+		die()
 
 	if Input.is_action_pressed("ui_up"):
 		self.direction = Vector2(0, -1)
@@ -103,9 +101,9 @@ func take_damage():
 	if isInvincible:
 		return
 
-	hp -= 1
+	fear += 25
 
-	if hp <= 0:
+	if fear >= 100:
 		die()
 	else:
 		isInvincible = true
