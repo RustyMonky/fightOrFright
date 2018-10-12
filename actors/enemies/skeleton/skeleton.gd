@@ -1,15 +1,13 @@
 extends KinematicBody2D
 
-enum STATE {ALIVE, ATTACK, FOLLOW, DEAD}
+enum STATE {ALIVE, FOLLOW, DEAD}
 
 onready var animations = $animations
 onready var collider = $collider
 onready var fadeTimer = $fadeTimer
 onready var fadeTween = $fadeTween
-onready var ray = $ray
 onready var timmy = get_parent().get_node("timmy")
 
-var attackAnimation = load("res://assets/spriteFrames/enemies/skeleton/skeletonAttack.tres")
 var currentState = STATE.ALIVE
 var direction
 var hp = 2
@@ -20,12 +18,6 @@ const SPEED = 32
 func _ready():
 	animations.playing = true
 	set_physics_process(true)
-	set_process(true)
-
-func _process(delta):
-	if ray.is_colliding() && can_hit_timmy():
-		if ray.get_collider() && ray.get_collider().is_in_group("timmy"):
-			attack()
 
 func _physics_process(delta):
 	if currentState == STATE.ALIVE:
@@ -46,12 +38,6 @@ func _physics_process(delta):
 			self.direction.x = -1
 
 		self.move_and_collide(self.direction.normalized() * SPEED * delta)
-
-func attack():
-	currentState = STATE.ATTACK
-	animations.set_sprite_frames(attackAnimation)
-	animations.set_animation("skeletonAttack")
-	timmy.take_damage()
 
 func can_hit_timmy():
 	if animations.flip_h:
@@ -80,10 +66,6 @@ func take_damage():
 func _on_animations_animation_finished():
 	if currentState == STATE.DEAD:
 		fadeTimer.start()
-	elif currentState == STATE.ATTACK:
-		currentState = STATE.FOLLOW
-		animations.set_sprite_frames(walkAnimation)
-		animations.set_animation("skeletonMove")
 
 func _on_fadeTimer_timeout():
 	fadeTween.interpolate_property(self, "modulate", Color(1,1,1,1), Color(1,1,1,0), 1, Tween.TRANS_LINEAR, Tween.EASE_OUT)

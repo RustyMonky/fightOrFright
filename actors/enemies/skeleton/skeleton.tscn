@@ -3,7 +3,7 @@
 [ext_resource path="res://actors/enemies/skeleton/skeleton.gd" type="Script" id=1]
 [ext_resource path="res://assets/spriteFrames/enemies/skeleton/skeletonWalk.tres" type="SpriteFrames" id=2]
 
-[node name="skeleton" type="KinematicBody2D" groups=[
+[node name="skeleton" type="KinematicBody2D" index="0" groups=[
 "enemies",
 ]]
 
@@ -41,13 +41,6 @@ playback_speed = 1.0
 playback/active = false
 playback/repeat = false
 playback/speed = 1.0
-
-[node name="ray" type="RayCast2D" parent="." index="4"]
-
-enabled = true
-exclude_parent = true
-cast_to = Vector2( 32, 0 )
-collision_mask = 1
 
 [connection signal="animation_finished" from="animations" to="." method="_on_animations_animation_finished" flags=3]
 

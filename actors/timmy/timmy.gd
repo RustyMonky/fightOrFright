@@ -44,6 +44,9 @@ func _process(delta):
 			animations.set_frame(0)
 
 func _input(event):
+	if fear >= 100:
+		die()
+
 	if currentState == STATE.DEAD:
 		return
 
