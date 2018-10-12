@@ -6,6 +6,7 @@ onready var animations = $animations
 onready var collider = $collider
 onready var fadeTimer = $fadeTimer
 onready var fadeTween = $fadeTween
+onready var lightOccluder = $lightOccluder
 onready var timmy = get_parent().get_node("timmy")
 
 var currentState = STATE.ALIVE
@@ -53,6 +54,7 @@ func take_damage():
 	if hp == 0:
 		currentState = STATE.DEAD
 		collider.disabled = true
+		self.remove_child(lightOccluder)
 		self.z_index = -1
 		if timmy.fear > 0:
 			timmy.update_fear(-1)
