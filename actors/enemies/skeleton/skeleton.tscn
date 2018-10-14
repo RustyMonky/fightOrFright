@@ -24,7 +24,6 @@ _sections_unfolded = [ "Collision", "Visibility" ]
 
 frames = ExtResource( 2 )
 animation = "skeletonMove"
-frame = 3
 
 [node name="collider" type="CollisionPolygon2D" parent="." index="1"]
 

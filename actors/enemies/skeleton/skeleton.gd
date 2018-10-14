@@ -12,6 +12,7 @@ onready var timmy = get_parent().get_node("timmy")
 var currentState = STATE.ALIVE
 var direction
 var hp = 2
+var deathAnimation = load("res://assets/spriteFrames/enemies/skeleton/skeletonDeath.tres")
 var walkAnimation = load("res://assets/spriteFrames/enemies/skeleton/skeletonWalk.tres")
 
 const SPEED = 32
@@ -52,7 +53,6 @@ func move_to_timmy():
 func take_damage():
 	hp -= 1
 	if hp == 0:
-		currentState = STATE.DEAD
 		collider.disabled = true
 		self.remove_child(lightOccluder)
 		self.z_index = -1
@@ -61,9 +61,9 @@ func take_damage():
 
 		print("Timmy's fear is " + String(timmy.fear))
 
-		var deathAnimation = load("res://assets/spriteFrames/enemies/skeleton/skeletonDeath.tres")
 		animations.set_sprite_frames(deathAnimation)
 		animations.set_animation("skeletonDeath")
+		currentState = STATE.DEAD
 
 func _on_animations_animation_finished():
 	if currentState == STATE.DEAD:
