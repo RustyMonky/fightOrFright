@@ -8,6 +8,9 @@ func _ready():
 	pass
 
 func _on_spawnTimer_timeout():
+	if get_tree().get_nodes_in_group("enemies").size() >= 20:
+		return
+
 	randomize()
 	# Create a new enemy on every timeout
 	var enemy = load("res://actors/enemies/skeleton/skeleton.tscn").instance()

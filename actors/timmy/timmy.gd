@@ -46,11 +46,11 @@ func _process(delta):
 			animations.set_frame(0)
 
 func _input(event):
-	if fear >= 100:
-		die()
-
 	if currentState == STATE.DEAD:
 		return
+
+	if fear >= 100:
+		die()
 
 	# Bullet functionality does not depend on MOVING or REST states
 	if event.is_action_pressed("ui_select"):
@@ -103,7 +103,7 @@ func move_timmy():
 	animations.play()
 
 func take_damage():
-	if isInvincible:
+	if isInvincible || currentState == STATE.DEAD:
 		return
 
 	update_fear(25)
@@ -119,17 +119,17 @@ func take_damage():
 func update_fear(changeInt):
 	fear += changeInt
 
-	var newScale
+	var newScale = 1 - abs(float(fear * 0.01))
+	if newScale > 1:
+		if !light.enabled:
+			light.enabled = true
+		newScale = 1
+	elif newScale <= 0:
+		light.enabled = false
 
-	if changeInt < 0 && light.texture_scale < 1:
-		newScale = light.texture_scale + float(fear * 0.01)
-	else:
-		newScale = light.texture_scale - float(fear * 0.01)
-	if !newScale:
-		return
-
-	lightTween.interpolate_property(light, "texture_scale", light.texture_scale, newScale, 0.5, Tween.TRANS_LINEAR, Tween.EASE_OUT)
-	lightTween.start()
+	if light.enabled:
+		lightTween.interpolate_property(light, "texture_scale", light.texture_scale, newScale, 0.5, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+		lightTween.start()
 
 func _on_animations_animation_finished():
 	if currentState == STATE.DEAD:
@@ -146,4 +146,3 @@ func _on_fearRange_body_entered(body):
 
 	if body.is_in_group("enemies"):
 		update_fear(5)
-		print("Timmy's fear is " + String(fear))

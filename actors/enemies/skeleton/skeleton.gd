@@ -59,11 +59,11 @@ func take_damage():
 		if timmy.fear > 0:
 			timmy.update_fear(-1)
 
-		print("Timmy's fear is " + String(timmy.fear))
-
 		animations.set_sprite_frames(deathAnimation)
 		animations.set_animation("skeletonDeath")
 		currentState = STATE.DEAD
+
+		gameData.mobsKilled += 1
 
 func _on_animations_animation_finished():
 	if currentState == STATE.DEAD:
