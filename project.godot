@@ -11,12 +11,13 @@ config_version=3
 [application]
 
 config/name="Fight or Fright"
-run/main_scene="res://levels/main.tscn"
+run/main_scene="res://levels/title.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 gameData="*res://globals/gameData.gd"
+sceneManager="*res://globals/sceneManager.gd"
 
 [display]
 

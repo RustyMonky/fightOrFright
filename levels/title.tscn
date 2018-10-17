@@ -1,0 +1,206 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://levels/title.gd" type="Script" id=1]
+[ext_resource path="res://assets/fonts/dynamicFonts/bloodshedHeader.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/fonts/dynamicFonts/bloodshedOptions.tres" type="DynamicFont" id=3]
+[ext_resource path="res://assets/sprites/level/titleSplash.png" type="Texture" id=4]
+[ext_resource path="res://assets/spriteFrames/enemies/skeleton/skeletonWalk.tres" type="SpriteFrames" id=5]
+
+[node name="title" type="Control"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+script = ExtResource( 1 )
+
+[node name="header" type="Label" parent="." index="0"]
+
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -137.0
+margin_top = -78.0
+margin_right = 137.0
+margin_bottom = -50.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 2 )
+text = "Fight or Fright"
+align = 1
+uppercase = true
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Rect", "custom_fonts" ]
+
+[node name="optionsVBox" type="VBoxContainer" parent="." index="1"]
+
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -320.0
+margin_top = -16.0
+margin_right = 320.0
+margin_bottom = 16.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+alignment = 0
+_sections_unfolded = [ "Rect" ]
+
+[node name="play" type="Label" parent="optionsVBox" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 640.0
+margin_bottom = 14.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 3 )
+text = "play"
+align = 1
+uppercase = true
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Rect", "custom_colors", "custom_fonts" ]
+
+[node name="help" type="Label" parent="optionsVBox" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 18.0
+margin_right = 640.0
+margin_bottom = 32.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 3 )
+text = "Help"
+align = 1
+uppercase = true
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_fonts" ]
+
+[node name="background" type="TextureRect" parent="." index="2"]
+
+show_behind_parent = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+texture = ExtResource( 4 )
+stretch_mode = 0
+_sections_unfolded = [ "Visibility" ]
+
+[node name="skeleton" type="AnimatedSprite" parent="background" index="0"]
+
+frames = ExtResource( 5 )
+animation = "skeletonMove"
+frame = 5
+playing = true
+centered = false
+
+[node name="skeleton2" type="AnimatedSprite" parent="background" index="1"]
+
+position = Vector2( 40, 0 )
+frames = ExtResource( 5 )
+animation = "skeletonMove"
+frame = 4
+playing = true
+centered = false
+
+[node name="skeleton3" type="AnimatedSprite" parent="background" index="2"]
+
+position = Vector2( 80, 0 )
+frames = ExtResource( 5 )
+animation = "skeletonMove"
+frame = 4
+playing = true
+centered = false
+
+[node name="skeleton4" type="AnimatedSprite" parent="background" index="3"]
+
+position = Vector2( 120, 0 )
+frames = ExtResource( 5 )
+animation = "skeletonMove"
+frame = 4
+playing = true
+centered = false
+
+[node name="skeleton5" type="AnimatedSprite" parent="background" index="4"]
+
+position = Vector2( 460, 0 )
+frames = ExtResource( 5 )
+animation = "skeletonMove"
+frame = 5
+playing = true
+centered = false
+flip_h = true
+
+[node name="skeleton6" type="AnimatedSprite" parent="background" index="5"]
+
+position = Vector2( 540, 0 )
+frames = ExtResource( 5 )
+animation = "skeletonMove"
+frame = 3
+playing = true
+centered = false
+flip_h = true
+
+[node name="skeleton7" type="AnimatedSprite" parent="background" index="6"]
+
+position = Vector2( 500, 0 )
+frames = ExtResource( 5 )
+animation = "skeletonMove"
+frame = 4
+playing = true
+centered = false
+flip_h = true
+
+[node name="skeleton8" type="AnimatedSprite" parent="background" index="7"]
+
+position = Vector2( 580, 0 )
+frames = ExtResource( 5 )
+animation = "skeletonMove"
+frame = 3
+playing = true
+centered = false
+flip_h = true
+
+
