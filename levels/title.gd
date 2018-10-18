@@ -16,6 +16,8 @@ func _input(event):
 	if event.is_action_pressed("ui_accept"):
 		if currentOption == OPTIONS.PLAY:
 			sceneManager.goto_scene("res://levels/main.tscn")
+		elif currentOption == OPTIONS.HELP:
+			sceneManager.goto_scene("res://levels/help.tscn")
 
 	elif event.is_action_pressed("ui_down"):
 		currentOption = OPTIONS.HELP
