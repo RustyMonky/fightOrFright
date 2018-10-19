@@ -15,7 +15,7 @@ var hp = 2
 var deathAnimation = load("res://assets/spriteFrames/enemies/skeleton/skeletonDeath.tres")
 var walkAnimation = load("res://assets/spriteFrames/enemies/skeleton/skeletonWalk.tres")
 
-const SPEED = 32
+var speed = 32
 
 func _ready():
 	animations.playing = true
@@ -23,7 +23,7 @@ func _ready():
 
 func _physics_process(delta):
 	if currentState == STATE.ALIVE:
-		self.move_and_collide(self.direction.normalized() * SPEED * delta)
+		self.move_and_collide(self.direction.normalized() * speed * delta)
 	elif currentState == STATE.FOLLOW:
 		if self.global_position.y < timmy.position.y:
 			self.direction.y = 1
@@ -39,7 +39,7 @@ func _physics_process(delta):
 			animations.flip_h = true
 			self.direction.x = -1
 
-		self.move_and_collide(self.direction.normalized() * SPEED * delta)
+		self.move_and_collide(self.direction.normalized() * speed * delta)
 
 func can_hit_timmy():
 	if animations.flip_h:

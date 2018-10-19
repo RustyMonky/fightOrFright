@@ -4,6 +4,8 @@ onready var changeTimer = $changeTimer
 onready var spawnTimer = $spawnTimer
 onready var viewport = get_parent().get_node("viewport")
 
+var spawnSpeedLevel = 1
+
 func _ready():
 	pass
 
@@ -26,7 +28,9 @@ func _on_spawnTimer_timeout():
 		enemy.direction = Vector2(-1, 0)
 		enemy.get_node("animations").flip_h = true
 	get_parent().add_child(enemy) # Assumes parent is level scene!
+	enemy.speed += (8 * spawnSpeedLevel)
 	
 func _on_changeTimer_timeout():
-	spawnTimer.wait_time = 0.5
+	spawnTimer.wait_time = (spawnTimer.wait_time * 0.5)
 	changeTimer.wait_time = 60
+	spawnSpeedLevel += 1
