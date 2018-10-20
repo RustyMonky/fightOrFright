@@ -3,10 +3,13 @@ extends Control
 enum OPTIONS {PLAY, HELP}
 
 onready var optionLabels = $optionsVBox.get_children()
+onready var skeletons = $background.get_children()
 
 var currentOption
 
 func _ready():
+	for mob in skeletons:
+		mob.play()
 	currentOption = OPTIONS.PLAY
 	updateHoveredOption()
 

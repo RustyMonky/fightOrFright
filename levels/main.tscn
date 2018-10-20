@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://levels/main.gd" type="Script" id=1]
 [ext_resource path="res://actors/timmy/timmy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://actors/enemies/spawner.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/sprites/level/background.png" type="Texture" id=4]
+[ext_resource path="res://assets/sounds/music/Iwan Gabovitch - Dark Ambience Loop.wav" type="AudioStream" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -102,6 +103,15 @@ process_mode = 1
 wait_time = 1.0
 one_shot = false
 autostart = true
+
+[node name="backgroundMusic" type="AudioStreamPlayer" parent="." index="8"]
+
+stream = ExtResource( 5 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = true
+mix_target = 0
+bus = "Master"
 
 [connection signal="body_entered" from="triggerZoneLeft" to="." method="_on_triggerZone_body_entered"]
 

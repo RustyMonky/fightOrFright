@@ -1,12 +1,13 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://levels/title.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/dynamicFonts/bloodshedHeader.tres" type="DynamicFont" id=2]
 [ext_resource path="res://assets/fonts/dynamicFonts/bloodshedOptions.tres" type="DynamicFont" id=3]
 [ext_resource path="res://assets/sprites/level/titleSplash.png" type="Texture" id=4]
 [ext_resource path="res://assets/spriteFrames/enemies/skeleton/skeletonWalk.tres" type="SpriteFrames" id=5]
+[ext_resource path="res://assets/sounds/music/ZombiesAreComing.wav" type="AudioStream" id=6]
 
-[node name="title" type="Control"]
+[node name="title" type="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -132,8 +133,7 @@ _sections_unfolded = [ "Visibility" ]
 
 frames = ExtResource( 5 )
 animation = "skeletonMove"
-frame = 5
-playing = true
+frame = 1
 centered = false
 
 [node name="skeleton2" type="AnimatedSprite" parent="background" index="1"]
@@ -141,8 +141,7 @@ centered = false
 position = Vector2( 40, 0 )
 frames = ExtResource( 5 )
 animation = "skeletonMove"
-frame = 4
-playing = true
+frame = 1
 centered = false
 
 [node name="skeleton3" type="AnimatedSprite" parent="background" index="2"]
@@ -150,8 +149,7 @@ centered = false
 position = Vector2( 80, 0 )
 frames = ExtResource( 5 )
 animation = "skeletonMove"
-frame = 4
-playing = true
+frame = 1
 centered = false
 
 [node name="skeleton4" type="AnimatedSprite" parent="background" index="3"]
@@ -159,8 +157,7 @@ centered = false
 position = Vector2( 120, 0 )
 frames = ExtResource( 5 )
 animation = "skeletonMove"
-frame = 4
-playing = true
+frame = 1
 centered = false
 
 [node name="skeleton5" type="AnimatedSprite" parent="background" index="4"]
@@ -168,8 +165,7 @@ centered = false
 position = Vector2( 460, 0 )
 frames = ExtResource( 5 )
 animation = "skeletonMove"
-frame = 5
-playing = true
+frame = 1
 centered = false
 flip_h = true
 
@@ -178,8 +174,7 @@ flip_h = true
 position = Vector2( 540, 0 )
 frames = ExtResource( 5 )
 animation = "skeletonMove"
-frame = 3
-playing = true
+frame = 1
 centered = false
 flip_h = true
 
@@ -188,8 +183,7 @@ flip_h = true
 position = Vector2( 500, 0 )
 frames = ExtResource( 5 )
 animation = "skeletonMove"
-frame = 4
-playing = true
+frame = 1
 centered = false
 flip_h = true
 
@@ -198,9 +192,17 @@ flip_h = true
 position = Vector2( 580, 0 )
 frames = ExtResource( 5 )
 animation = "skeletonMove"
-frame = 3
-playing = true
+frame = 1
 centered = false
 flip_h = true
+
+[node name="backgroundMusic" type="AudioStreamPlayer" parent="." index="3"]
+
+stream = ExtResource( 6 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = true
+mix_target = 0
+bus = "Master"
 
 
