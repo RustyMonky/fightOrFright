@@ -4,10 +4,12 @@ enum STATE { REST, MOVING, DEAD }
 
 onready var animations = $animations
 onready var animationPlayer = $animationPlayer
+onready var audio = $audio
 onready var collider = $collider
 onready var invincibleTimer = $invincibleTimer
 onready var light = $light
 onready var lightTween = $lightTween
+onready var pistolSound = load("res://assets/sounds/effects/pistol.wav")
 
 var currentState = STATE.REST
 var direction = Vector2(0, 0)
@@ -77,6 +79,8 @@ func fire():
 		bulletInstance.direction = Vector2(1, 0)
 		bulletInstance.position = self.position + Vector2(14, 16)
 	get_parent().add_child(bulletInstance)
+	audio.set_stream(pistolSound)
+	audio.play()
 
 func move_timmy():
 	currentState = STATE.MOVING

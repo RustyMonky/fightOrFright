@@ -3,7 +3,9 @@ extends KinematicBody2D
 enum STATE {ALIVE, FOLLOW, DEAD}
 
 onready var animations = $animations
+onready var audio = $audio
 onready var collider = $collider
+onready var deathSound = load("res://assets/sounds/effects/skeletonDeath.wav")
 onready var fadeTimer = $fadeTimer
 onready var fadeTween = $fadeTween
 onready var lightOccluder = $lightOccluder
@@ -64,6 +66,9 @@ func take_damage():
 		currentState = STATE.DEAD
 
 		gameData.mobsKilled += 1
+
+		audio.set_stream(deathSound)
+		audio.play()
 
 func _on_animations_animation_finished():
 	if currentState == STATE.DEAD:

@@ -7,7 +7,7 @@
 [ext_resource path="res://assets/spriteFrames/enemies/skeleton/skeletonWalk.tres" type="SpriteFrames" id=5]
 [ext_resource path="res://assets/sounds/music/ZombiesAreComing.wav" type="AudioStream" id=6]
 
-[node name="title" type="Control" index="0"]
+[node name="title" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0
