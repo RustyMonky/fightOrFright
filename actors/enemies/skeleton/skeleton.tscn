@@ -9,7 +9,7 @@ closed = true
 cull_mode = 0
 polygon = PoolVector2Array( -10.4028, 30.7857, 9.11765, 30.2233 )
 
-[node name="skeleton" type="KinematicBody2D" index="0" groups=[
+[node name="skeleton" type="KinematicBody2D" groups=[
 "enemies",
 ]]
 
