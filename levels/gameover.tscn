@@ -1,10 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://levels/gameover.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/dynamicFonts/bloodshedHeader.tres" type="DynamicFont" id=2]
 [ext_resource path="res://assets/fonts/dynamicFonts/bloodshedOptions.tres" type="DynamicFont" id=3]
+[ext_resource path="res://assets/sounds/effects/darkLongHits.wav" type="AudioStream" id=4]
 
-[node name="gameover" type="Control" index="0"]
+[node name="gameover" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -22,6 +23,7 @@ _sections_unfolded = [ "Rect" ]
 
 [node name="canvas" type="CanvasLayer" parent="." index="0"]
 
+editor/display_folded = true
 layer = 1
 offset = Vector2( 0, 0 )
 rotation = 0.0
@@ -147,6 +149,15 @@ process_mode = 1
 wait_time = 5.0
 one_shot = true
 autostart = true
+
+[node name="audio" type="AudioStreamPlayer" parent="." index="2"]
+
+stream = ExtResource( 4 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = true
+mix_target = 0
+bus = "Master"
 
 [connection signal="timeout" from="delayTimer" to="." method="_on_delayTimer_timeout"]
 

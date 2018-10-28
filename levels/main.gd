@@ -1,6 +1,7 @@
 extends Node2D
 
 onready var timmy = $timmy
+onready var audio = $backgroundMusic
 
 var hasGameover = false
 
@@ -25,3 +26,4 @@ func _on_gameTime_timeout():
 		hasGameover = true
 		var gameoverScene = load("res://levels/gameover.tscn").instance()
 		self.add_child(gameoverScene)
+		audio.stop()
