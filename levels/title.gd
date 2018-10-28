@@ -2,6 +2,7 @@ extends Control
 
 enum OPTIONS {PLAY, HELP}
 
+onready var help = $help
 onready var optionLabels = $optionsVBox.get_children()
 onready var spawner = $spawner
 
@@ -14,11 +15,14 @@ func _ready():
 	set_process_input(true)
 
 func _input(event):
+	if help.is_visible():
+		return
+
 	if event.is_action_pressed("ui_accept"):
 		if currentOption == OPTIONS.PLAY:
 			sceneManager.goto_scene("res://levels/main.tscn")
 		elif currentOption == OPTIONS.HELP:
-			sceneManager.goto_scene("res://levels/help.tscn")
+			help.show()
 
 	elif event.is_action_pressed("ui_down"):
 		currentOption = OPTIONS.HELP

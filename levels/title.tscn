@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://levels/title.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/dynamicFonts/bloodshedHeader.tres" type="DynamicFont" id=2]
@@ -6,8 +6,9 @@
 [ext_resource path="res://assets/sprites/level/titleSplash.png" type="Texture" id=4]
 [ext_resource path="res://assets/sounds/music/ZombiesAreComing.wav" type="AudioStream" id=5]
 [ext_resource path="res://actors/enemies/spawner.tscn" type="PackedScene" id=6]
+[ext_resource path="res://levels/help.tscn" type="PackedScene" id=7]
 
-[node name="title" type="Control"]
+[node name="title" type="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -20,6 +21,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 1 )
+_sections_unfolded = [ "Visibility" ]
 
 [node name="viewport" type="Viewport" parent="." index="0"]
 
@@ -167,5 +169,10 @@ mix_target = 0
 bus = "Master"
 
 [node name="spawner" parent="." index="5" instance=ExtResource( 6 )]
+
+[node name="help" parent="." index="6" instance=ExtResource( 7 )]
+
+visible = false
+_sections_unfolded = [ "Visibility" ]
 
 

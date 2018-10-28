@@ -29,7 +29,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-color = Color( 0.121569, 0.0941176, 0.2, 1 )
+color = Color( 0.0666667, 0.0666667, 0.0666667, 1 )
 
 [node name="prompt" type="Label" parent="." index="1"]
 
