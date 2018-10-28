@@ -22,7 +22,6 @@ _sections_unfolded = [ "Rect" ]
 
 [node name="canvas" type="CanvasLayer" parent="." index="0"]
 
-editor/display_folded = true
 layer = 1
 offset = Vector2( 0, 0 )
 rotation = 0.0
@@ -63,13 +62,15 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
 custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0.788235, 0.188235, 0.219608, 1 )
 text = "Gameover"
 align = 1
 uppercase = true
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "custom_fonts" ]
+_sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
 [node name="mobsLabel" type="Label" parent="canvas/centerBox" index="1"]
 

@@ -2,6 +2,8 @@ extends Node2D
 
 onready var timmy = $timmy
 
+var hasGameover = false
+
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
@@ -19,6 +21,7 @@ func _on_gameTime_timeout():
 		else:
 			gameData.secondsAlive += 1
 
-	else:
+	elif !hasGameover:
+		hasGameover = true
 		var gameoverScene = load("res://levels/gameover.tscn").instance()
 		self.add_child(gameoverScene)
