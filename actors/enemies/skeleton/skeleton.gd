@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-enum STATE {ALIVE, FOLLOW, DEAD}
+enum STATE {ALIVE, FOLLOW, DEAD, TITLE}
 
 onready var animations = $animations
 onready var audio = $audio
@@ -9,22 +9,29 @@ onready var deathSound = load("res://assets/sounds/effects/skeletonDeath.wav")
 onready var fadeTimer = $fadeTimer
 onready var fadeTween = $fadeTween
 onready var lightOccluder = $lightOccluder
-onready var timmy = get_parent().get_node("timmy")
 
 var currentState = STATE.ALIVE
+var deathAnimation = load("res://assets/spriteFrames/enemies/skeleton/skeletonDeath.tres")
 var direction
 var hp = 2
-var deathAnimation = load("res://assets/spriteFrames/enemies/skeleton/skeletonDeath.tres")
+var timmy
 var walkAnimation = load("res://assets/spriteFrames/enemies/skeleton/skeletonWalk.tres")
 
 var speed = 32
 
 func _ready():
+	if !get_parent().has_node("timmy"):
+		currentState = STATE.TITLE
+		speed = 24
+	else:
+		timmy = get_parent().get_node("timmy")
 	animations.playing = true
 	set_physics_process(true)
 
 func _physics_process(delta):
-	if currentState == STATE.ALIVE:
+	if self.global_position.x > get_parent().get_viewport().size.x + 32:
+		self.queue_free()
+	if currentState == STATE.ALIVE || currentState == STATE.TITLE:
 		self.move_and_collide(self.direction.normalized() * speed * delta)
 	elif currentState == STATE.FOLLOW:
 		if self.global_position.y < timmy.position.y:
