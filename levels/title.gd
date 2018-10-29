@@ -2,6 +2,8 @@ extends Control
 
 enum OPTIONS {PLAY, HELP}
 
+onready var bgAudio = $backgroundMusic
+onready var effectAudio = $effectAudio
 onready var help = $help
 onready var optionLabels = $optionsVBox.get_children()
 onready var spawner = $spawner
@@ -20,6 +22,8 @@ func _input(event):
 
 	if event.is_action_pressed("ui_accept"):
 		if currentOption == OPTIONS.PLAY:
+			bgAudio.stop()
+			effectAudio.play()
 			fader.fadeToScene("res://levels/main.tscn")
 		elif currentOption == OPTIONS.HELP:
 			help.show()
