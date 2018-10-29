@@ -5,8 +5,8 @@
 
 [sub_resource type="OccluderPolygon2D" id=1]
 
-closed = true
-cull_mode = 0
+closed = false
+cull_mode = 2
 polygon = PoolVector2Array( -10.4028, 30.7857, 9.11765, 30.2233 )
 
 [node name="skeleton" type="KinematicBody2D" groups=[
@@ -51,7 +51,7 @@ playback/speed = 1.0
 
 occluder = SubResource( 1 )
 light_mask = 1
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Transform", "Visibility" ]
 
 [node name="audio" type="AudioStreamPlayer" parent="." index="5"]
 
