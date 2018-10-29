@@ -20,7 +20,7 @@ func _input(event):
 
 	if event.is_action_pressed("ui_accept"):
 		if currentOption == OPTIONS.PLAY:
-			sceneManager.goto_scene("res://levels/main.tscn")
+			fader.fadeToScene("res://levels/main.tscn")
 		elif currentOption == OPTIONS.HELP:
 			help.show()
 

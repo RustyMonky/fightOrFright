@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://levels/help.gd" type="Script" id=1]
-[ext_resource path="res://assets/fonts/dynamicFonts/annieText.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/fonts/dynamicFonts/bloodshedOptions.tres" type="DynamicFont" id=2]
 
 [node name="help" type="Control"]
 
@@ -37,8 +37,11 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 0.0
-margin_bottom = 111.0
-rect_min_size = Vector2( 640, 0 )
+margin_left = 80.0
+margin_top = -50.0
+margin_right = -80.0
+margin_bottom = 195.0
+rect_min_size = Vector2( 480, 0 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -46,9 +49,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
 custom_fonts/font = ExtResource( 2 )
-text = "As Timmy, you must fight your fear to survive against waves of skeletons.
-The more frightened you become, the worse your aim and light.
-The longer you live and the more skeletons you destroy, the better!"
+text = "As Timmy, you must fight your fear to survive against waves of skeletons. The more frightened you become, the worse your aim and light. The longer you live and the more skeletons you destroy, the better!"
 align = 1
 valign = 1
 autowrap = true
@@ -63,8 +64,8 @@ anchor_left = 0.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_top = -36.5
-margin_bottom = 36.5
+margin_top = -80.0
+margin_bottom = 69.0
 rect_min_size = Vector2( 640, 0 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false

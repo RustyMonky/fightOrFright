@@ -12,8 +12,8 @@ func _ready():
 	set_process_input(true)
 
 func _input(event):
-	if event.is_action_pressed("ui_accept") && canTransition:
-		sceneManager.goto_scene("res://levels/title.tscn")
+	if (event.is_action_pressed("ui_accept") || event.is_action_pressed("ui_select")) && canTransition:
+		fader.fadeToScene("res://levels/title.tscn")
 
 func formattedTime():
 	if int(gameData.secondsAlive) < 10:
