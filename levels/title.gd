@@ -1,8 +1,9 @@
 extends Control
 
-enum OPTIONS {PLAY, HELP}
+enum OPTIONS {PLAY, HELP, CREDITS}
 
 onready var bgAudio = $backgroundMusic
+onready var credits = $credits
 onready var effectAudio = $effectAudio
 onready var help = $help
 onready var optionLabels = $optionsVBox.get_children()
@@ -27,12 +28,20 @@ func _input(event):
 			fader.fadeToScene("res://levels/main.tscn")
 		elif currentOption == OPTIONS.HELP:
 			help.show()
+		elif currentOption == OPTIONS.CREDITS:
+			credits.show()
 
 	elif event.is_action_pressed("ui_down"):
-		currentOption = OPTIONS.HELP
+		if currentOption == OPTIONS.PLAY:
+			currentOption = OPTIONS.HELP
+		else:
+			currentOption = OPTIONS.CREDITS
 		updateHoveredOption()
 	elif event.is_action_pressed("ui_up"):
-		currentOption = OPTIONS.PLAY
+		if currentOption == OPTIONS.HELP:
+			currentOption = OPTIONS.PLAY
+		else:
+			currentOption = OPTIONS.HELP
 		updateHoveredOption()
 
 func updateHoveredOption():
