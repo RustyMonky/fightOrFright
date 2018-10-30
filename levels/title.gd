@@ -1,6 +1,6 @@
 extends Control
 
-enum OPTIONS {PLAY, HELP, CREDITS}
+enum OPTIONS {PLAY, HELP, CREDITS, QUIT}
 
 onready var bgAudio = $backgroundMusic
 onready var credits = $credits
@@ -18,10 +18,10 @@ func _ready():
 	set_process_input(true)
 
 func _input(event):
-	if help.is_visible():
+	if help.is_visible() || credits.is_visible():
 		return
 
-	if event.is_action_pressed("ui_accept"):
+	elif event.is_action_pressed("ui_accept"):
 		if currentOption == OPTIONS.PLAY:
 			bgAudio.stop()
 			effectAudio.play()
@@ -30,18 +30,24 @@ func _input(event):
 			help.show()
 		elif currentOption == OPTIONS.CREDITS:
 			credits.show()
+		elif currentOption == OPTIONS.QUIT:
+			get_tree().quit()
 
 	elif event.is_action_pressed("ui_down"):
 		if currentOption == OPTIONS.PLAY:
 			currentOption = OPTIONS.HELP
-		else:
+		elif currentOption == OPTIONS.HELP:
 			currentOption = OPTIONS.CREDITS
+		else:
+			currentOption = OPTIONS.QUIT
 		updateHoveredOption()
 	elif event.is_action_pressed("ui_up"):
 		if currentOption == OPTIONS.HELP:
 			currentOption = OPTIONS.PLAY
-		else:
+		elif currentOption == OPTIONS.CREDITS:
 			currentOption = OPTIONS.HELP
+		else:
+			currentOption = OPTIONS.CREDITS
 		updateHoveredOption()
 
 func updateHoveredOption():
