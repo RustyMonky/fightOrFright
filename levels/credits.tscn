@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/fonts/dynamicFonts/bloodshedHeader.tres" type="DynamicFont" id=2]
 [ext_resource path="res://assets/fonts/dynamicFonts/bloodshedOptions.tres" type="DynamicFont" id=3]
 
-[node name="credits" type="Control"]
+[node name="credits" type="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -112,6 +112,7 @@ Dark Long Hits by Marcelo Fernandez
 https://opengameart.org/content/dark-long-hits
 
 All sprites created by RustyMonky
+
 A game created for #devtober 2018
 
 Thanks for playing!
