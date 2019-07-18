@@ -6,114 +6,44 @@
 [ext_resource path="res://assets/sprites/light/timmy-light.png" type="Texture" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
-
-custom_solver_bias = 0.0
 radius = 110.0
 
 [node name="timmy" type="KinematicBody2D" groups=[
 "timmy",
 ]]
-
-input_pickable = false
-collision_layer = 1
-collision_mask = 1
-collision/safe_margin = 0.08
 script = ExtResource( 1 )
-_sections_unfolded = [ "Collision", "Pickable", "Transform", "collision" ]
 
-[node name="animations" type="AnimatedSprite" parent="." index="0"]
-
+[node name="animations" type="AnimatedSprite" parent="."]
 frames = ExtResource( 2 )
 animation = "timmyWalk"
-_sections_unfolded = [ "Transform", "Visibility" ]
 
-[node name="collider" type="CollisionPolygon2D" parent="." index="1"]
-
-build_mode = 0
+[node name="collider" type="CollisionPolygon2D" parent="."]
 polygon = PoolVector2Array( -14.2181, -6.34605, -14.2181, -6.34605, -7.02144, -23.4381, 6.60081, -23.1811, 11.8698, -12.6431, 13.669, -4.41837, 13.669, 0.465076, 9.04253, 5.99109, 9.04253, 12.6737, 6.21527, 17.9427, 5.05867, 29.7658, -4.06567, 30.0228, -3.93716, 26.1674, -1.1099, 24.1112, -2.78055, 17.5571, -10.2342, 15.758, -13.19, 12.8022, -12.933, 9.20388 )
-_sections_unfolded = [ "Z Index" ]
 
-[node name="invincibleTimer" type="Timer" parent="." index="2"]
-
-process_mode = 1
+[node name="invincibleTimer" type="Timer" parent="."]
 wait_time = 3.0
-one_shot = false
-autostart = false
 
-[node name="animationPlayer" type="AnimationPlayer" parent="." index="3"]
-
-root_node = NodePath("..")
-autoplay = ""
-playback_process_mode = 1
-playback_default_blend_time = 0.0
-playback_speed = 1.0
+[node name="animationPlayer" type="AnimationPlayer" parent="."]
 anims/timmyDamaged = ExtResource( 3 )
 anims/timmyDeath = ExtResource( 3 )
-blend_times = [  ]
-_sections_unfolded = [ "Playback Options" ]
 
-[node name="fearRange" type="Area2D" parent="." index="4"]
-
+[node name="fearRange" type="Area2D" parent="."]
 editor/display_folded = true
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-audio_bus_override = false
-audio_bus_name = "Master"
 
-[node name="fearCollider" type="CollisionShape2D" parent="fearRange" index="0"]
-
+[node name="fearCollider" type="CollisionShape2D" parent="fearRange"]
 shape = SubResource( 1 )
 
-[node name="light" type="Light2D" parent="." index="5"]
-
-enabled = true
-editor_only = false
+[node name="light" type="Light2D" parent="."]
 texture = ExtResource( 4 )
-offset = Vector2( 0, 0 )
-texture_scale = 1.0
-color = Color( 1, 1, 1, 1 )
-energy = 1.0
-mode = 0
-range_height = 0.0
-range_z_min = -1024
-range_z_max = 1024
-range_layer_min = 0
-range_layer_max = 0
-range_item_cull_mask = 1
 shadow_enabled = true
 shadow_color = Color( 0, 0, 0, 1 )
 shadow_buffer_size = 512
 shadow_gradient_length = 5.0
 shadow_filter = 1
-shadow_filter_smooth = 0.0
-shadow_item_cull_mask = 1
-_sections_unfolded = [ "Range", "Shadow", "Transform" ]
 
-[node name="lightTween" type="Tween" parent="." index="6"]
+[node name="lightTween" type="Tween" parent="."]
 
-repeat = false
-playback_process_mode = 1
-playback_speed = 1.0
-playback/active = false
-playback/repeat = false
-playback/speed = 1.0
-
-[node name="audio" type="AudioStreamPlayer" parent="." index="7"]
-
-stream = null
-volume_db = 0.0
-pitch_scale = 1.0
-autoplay = false
-mix_target = 0
-bus = "Master"
-
+[node name="audio" type="AudioStreamPlayer" parent="."]
 [connection signal="animation_finished" from="animations" to="." method="_on_animations_animation_finished"]
-
 [connection signal="timeout" from="invincibleTimer" to="." method="_on_invincibleTimer_timeout"]
-
 [connection signal="body_entered" from="fearRange" to="." method="_on_fearRange_body_entered"]
-
-

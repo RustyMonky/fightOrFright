@@ -10,7 +10,6 @@
 [ext_resource path="res://assets/sounds/effects/darkLongHits.wav" type="AudioStream" id=8]
 [ext_resource path="res://scenes/credits/credits.tscn" type="PackedScene" id=9]
 
-
 [node name="title" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0

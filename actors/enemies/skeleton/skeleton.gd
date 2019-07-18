@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+const SPEED = 8
+
 enum STATE {ALIVE, FOLLOW, DEAD, TITLE}
 
 onready var animations = $animations
@@ -17,12 +19,12 @@ var hp = 2
 var timmy
 var walkAnimation = load("res://assets/spriteFrames/enemies/skeleton/skeletonWalk.tres")
 
-var speed = 32
+var speed = SPEED * 4
 
 func _ready():
 	if !get_parent().has_node("timmy"):
 		currentState = STATE.TITLE
-		speed = 24
+		speed = SPEED * 3
 	else:
 		timmy = get_parent().get_node("timmy")
 	animations.playing = true
@@ -62,7 +64,7 @@ func move_to_timmy():
 func take_damage():
 	hp -= 1
 	if hp == 0:
-		collider.disabled = true
+		self.remove_child(collider)
 		self.remove_child(lightOccluder)
 		self.z_index = -1
 		if timmy.fear > 0:
