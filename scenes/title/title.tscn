@@ -1,0 +1,113 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://scenes/title/title.gd" type="Script" id=1]
+[ext_resource path="res://assets/fonts/dynamicFonts/bloodshedHeader.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/fonts/dynamicFonts/bloodshedOptions.tres" type="DynamicFont" id=3]
+[ext_resource path="res://assets/sprites/level/titleSplash.png" type="Texture" id=4]
+[ext_resource path="res://assets/sounds/music/ZombiesAreComing.wav" type="AudioStream" id=5]
+[ext_resource path="res://actors/enemies/spawner.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/help/help.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/sounds/effects/darkLongHits.wav" type="AudioStream" id=8]
+[ext_resource path="res://scenes/credits/credits.tscn" type="PackedScene" id=9]
+
+
+[node name="title" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="viewport" type="Viewport" parent="."]
+size = Vector2( 640, 360 )
+
+[node name="header" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -130.0
+margin_top = 10.0
+margin_right = 144.0
+margin_bottom = 38.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.788235, 0.188235, 0.219608, 1 )
+custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
+text = "Fight or Fright"
+align = 1
+uppercase = true
+
+[node name="optionsVBox" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -320.0
+margin_top = 50.0
+margin_right = 320.0
+margin_bottom = 118.0
+
+[node name="play" type="Label" parent="optionsVBox"]
+margin_right = 640.0
+margin_bottom = 14.0
+custom_fonts/font = ExtResource( 3 )
+text = "play"
+align = 1
+uppercase = true
+
+[node name="help" type="Label" parent="optionsVBox"]
+margin_top = 18.0
+margin_right = 640.0
+margin_bottom = 32.0
+custom_fonts/font = ExtResource( 3 )
+text = "Help"
+align = 1
+uppercase = true
+
+[node name="credits" type="Label" parent="optionsVBox"]
+margin_top = 36.0
+margin_right = 640.0
+margin_bottom = 50.0
+custom_fonts/font = ExtResource( 3 )
+text = "Credits"
+align = 1
+uppercase = true
+
+[node name="quit" type="Label" parent="optionsVBox"]
+margin_top = 54.0
+margin_right = 640.0
+margin_bottom = 68.0
+custom_fonts/font = ExtResource( 3 )
+text = "Quit"
+align = 1
+uppercase = true
+
+[node name="background" type="TextureRect" parent="."]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 4 )
+
+[node name="backgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+autoplay = true
+
+[node name="spawner" parent="." instance=ExtResource( 6 )]
+
+[node name="help" parent="." instance=ExtResource( 7 )]
+visible = false
+
+[node name="effectAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+
+[node name="credits" parent="." instance=ExtResource( 9 )]
+visible = false
+
+[node name="releaseLabel" type="Label" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -40.0
+margin_top = -14.0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0.784314, 0.184314, 0.219608, 1 )
+text = "v1.0"

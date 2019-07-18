@@ -24,6 +24,6 @@ func _on_gameTime_timeout():
 
 	elif !hasGameover:
 		hasGameover = true
-		var gameoverScene = load("res://levels/gameover.tscn").instance()
+		var gameoverScene = load("res://scenes/gameover/gameover.tscn").instance()
 		self.add_child(gameoverScene)
 		audio.stop()

@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Fight or Fright"
-run/main_scene="res://levels/title.tscn"
+run/main_scene="res://scenes/title/title.tscn"
 config/icon="res://icon.png"
 
 [autoload]

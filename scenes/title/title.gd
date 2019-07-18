@@ -25,7 +25,7 @@ func _input(event):
 		if currentOption == OPTIONS.PLAY:
 			bgAudio.stop()
 			effectAudio.play()
-			fader.fadeToScene("res://levels/main.tscn")
+			fader.fadeToScene("res://scenes/main/main.tscn")
 		elif currentOption == OPTIONS.HELP:
 			help.show()
 		elif currentOption == OPTIONS.CREDITS:

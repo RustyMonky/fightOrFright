@@ -1,10 +1,12 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://levels/main.gd" type="Script" id=1]
+[ext_resource path="res://scenes/main/main.gd" type="Script" id=1]
 [ext_resource path="res://actors/timmy/timmy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://actors/enemies/spawner.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/sprites/level/background.png" type="Texture" id=4]
 [ext_resource path="res://assets/sounds/music/Iwan Gabovitch - Dark Ambience Loop.wav" type="AudioStream" id=5]
+
+
 
 [sub_resource type="RectangleShape2D" id=1]
 
