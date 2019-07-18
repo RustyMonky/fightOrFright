@@ -23,7 +23,7 @@ config/icon="res://icon.png"
 
 gameData="*res://globals/gameData.gd"
 sceneManager="*res://globals/sceneManager.gd"
-fader="*res://globals/fader.tscn"
+fader="*res://globals/fader/fader.tscn"
 
 [display]
 
