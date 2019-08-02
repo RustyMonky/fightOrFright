@@ -17,7 +17,6 @@ var deathAnimation = load("res://assets/spriteFrames/enemies/skeleton/skeletonDe
 var direction
 var hp = 2
 var timmy
-var walkAnimation = load("res://assets/spriteFrames/enemies/skeleton/skeletonWalk.tres")
 
 var speed = SPEED * 4
 
@@ -87,5 +86,5 @@ func _on_fadeTimer_timeout():
 	fadeTween.interpolate_property(self, "modulate", Color(1,1,1,1), Color(1,1,1,0), 1, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	fadeTween.start()
 
-func _on_fadeTween_tween_completed(object, key):
+func _on_fadeTween_tween_completed():
 	self.queue_free()

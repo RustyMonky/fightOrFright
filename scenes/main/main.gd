@@ -1,14 +1,13 @@
 extends Node2D
 
+onready var tilemap = $tilemap
 onready var timmy = $timmy
 onready var audio = $backgroundMusic
 
 var hasGameover = false
 
 func _ready():
-	# Called when the node is added to the scene for the first time.
-	# Initialization here
-	pass
+	timmy.position = tilemap.map_to_world(Vector2(12, -4)) # Set timmy in center of the tilemap
 
 func _on_triggerZone_body_entered(body):
 	if body.is_in_group("enemies"):

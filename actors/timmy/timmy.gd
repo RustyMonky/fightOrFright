@@ -1,5 +1,12 @@
 extends KinematicBody2D
 
+const SPEED = 50
+
+const UP = Vector2(0, -1)
+const DOWN = Vector2(0, 1)
+const LEFT = Vector2(-1, 0)
+const RIGHT = Vector2(1, 0)
+
 enum STATE { REST, MOVING, DEAD }
 
 onready var animations = $animations
@@ -16,8 +23,6 @@ var direction = Vector2(0, 0)
 var fear = 0
 var isInvincible = false
 
-const SPEED = 2
-
 func _ready():
 	set_process(true)
 	set_process_input(true)
@@ -30,17 +35,17 @@ func _process(delta):
 		die()
 
 	if Input.is_action_pressed("ui_up"):
-		self.direction = Vector2(0, -1)
-		move_timmy()
+		self.direction = UP
+		move_timmy(delta)
 	elif Input.is_action_pressed("ui_down"):
-		self.direction = Vector2(0, 1)
-		move_timmy()
+		self.direction = DOWN
+		move_timmy(delta)
 	elif Input.is_action_pressed("ui_left"):
-		self.direction = Vector2(-1, 0)
-		move_timmy()
+		self.direction = LEFT
+		move_timmy(delta)
 	elif Input.is_action_pressed("ui_right"):
-		self.direction = Vector2(1, 0)
-		move_timmy()
+		self.direction = RIGHT
+		move_timmy(delta)
 
 	if currentState == STATE.REST:
 		if animations.is_playing():
@@ -76,13 +81,13 @@ func fire():
 		bulletInstance.direction = Vector2(0, 0)
 		bulletInstance.position = self.position + Vector2(-14, 16)
 	else:
-		bulletInstance.direction = Vector2(1, 0)
+		bulletInstance.direction = RIGHT
 		bulletInstance.position = self.position + Vector2(14, 16)
 	get_parent().add_child(bulletInstance)
 	audio.set_stream(pistolSound)
 	audio.play()
 
-func move_timmy():
+func move_timmy(delta):
 	currentState = STATE.MOVING
 	if self.global_position.y + 32 > 360 && self.direction.y == 1:
 		self.direction.y = 0
@@ -94,7 +99,9 @@ func move_timmy():
 	elif self.global_position.x + 16 > 640 && self.direction.x == 1:
 		self.direction.x = 0
 
-	var collision = self.move_and_collide(direction * SPEED)
+	var motion = direction * SPEED * delta
+	motion = util.cartesian_to_isometric(motion)
+	var collision = self.move_and_collide(motion)
 	if (collision && collision.collider.is_in_group("enemies")):
 		take_damage()
 

@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/main/main.gd" type="Script" id=1]
-[ext_resource path="res://actors/timmy/timmy.tscn" type="PackedScene" id=2]
-[ext_resource path="res://actors/enemies/spawner.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/sprites/level/background.png" type="Texture" id=4]
-[ext_resource path="res://assets/sounds/music/Iwan Gabovitch - Dark Ambience Loop.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/tilesets/main/mainSet.tres" type="TileSet" id=2]
+[ext_resource path="res://actors/timmy/timmy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://actors/enemies/spawner.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/sprites/level/background.png" type="Texture" id=5]
+[ext_resource path="res://assets/sounds/music/Iwan Gabovitch - Dark Ambience Loop.wav" type="AudioStream" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 20, 180 )
@@ -17,13 +18,18 @@ size = Vector2( 640, 360 )
 disable_3d = true
 usage = 0
 
-[node name="timmy" parent="." instance=ExtResource( 2 )]
+[node name="tilemap" type="TileMap" parent="."]
+mode = 1
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 80, 39 )
+format = 1
+
+[node name="timmy" parent="." instance=ExtResource( 3 )]
 position = Vector2( 320, 180 )
 
-[node name="spawner" parent="." instance=ExtResource( 3 )]
+[node name="spawner" parent="." instance=ExtResource( 4 )]
 
 [node name="triggerZoneLeft" type="Area2D" parent="."]
-editor/display_folded = true
 
 [node name="triggerCollider" type="CollisionShape2D" parent="triggerZoneLeft"]
 position = Vector2( 140, 180 )
@@ -39,7 +45,7 @@ shape = SubResource( 1 )
 [node name="background" type="Sprite" parent="."]
 show_behind_parent = true
 z_index = -2
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 centered = false
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
@@ -49,7 +55,7 @@ color = Color( 0, 0, 0, 0.882353 )
 autostart = true
 
 [node name="backgroundMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 5 )
+stream = ExtResource( 6 )
 autoplay = true
 [connection signal="body_entered" from="triggerZoneLeft" to="." method="_on_triggerZone_body_entered"]
 [connection signal="body_entered" from="triggerZoneRight" to="." method="_on_triggerZone_body_entered"]

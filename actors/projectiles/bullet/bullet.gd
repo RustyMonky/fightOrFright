@@ -31,7 +31,9 @@ func _physics_process(delta):
 
 	# Lastly, update bullet direction with fear
 	self.direction.y = bulletChange
-	self.global_position += self.direction.normalized() * SPEED * delta
+
+	var motion = (self.direction.normalized() * SPEED * delta)
+	self.global_position += util.cartesian_to_isometric(motion)
 
 	if self.global_position.x < 0 || self.global_position.x > OS.get_screen_size().x || self.global_position.y < 0 || self.global_position.y > OS.get_screen_size().y:
 		self.queue_free()
