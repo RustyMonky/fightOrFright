@@ -18,10 +18,12 @@ onready var light = $light
 onready var lightTween = $lightTween
 onready var pistolSound = load("res://assets/sounds/effects/pistol.wav")
 
+var collision
 var currentState = STATE.REST
 var direction = Vector2(0, 0)
 var fear = 0
 var isInvincible = false
+var motion
 
 func _ready():
 	set_process(true)
@@ -37,15 +39,19 @@ func _process(delta):
 	if Input.is_action_pressed("ui_up"):
 		self.direction = UP
 		move_timmy(delta)
+
 	elif Input.is_action_pressed("ui_down"):
 		self.direction = DOWN
 		move_timmy(delta)
+
 	elif Input.is_action_pressed("ui_left"):
 		self.direction = LEFT
 		move_timmy(delta)
+
 	elif Input.is_action_pressed("ui_right"):
 		self.direction = RIGHT
 		move_timmy(delta)
+
 
 	if currentState == STATE.REST:
 		if animations.is_playing():
@@ -89,6 +95,7 @@ func fire():
 
 func move_timmy(delta):
 	currentState = STATE.MOVING
+
 	if self.global_position.y + 32 > 360 && self.direction.y == 1:
 		self.direction.y = 0
 	elif self.global_position.y - 32 < 0 && self.direction.y == -1:
@@ -99,9 +106,8 @@ func move_timmy(delta):
 	elif self.global_position.x + 16 > 640 && self.direction.x == 1:
 		self.direction.x = 0
 
-	var motion = direction * SPEED * delta
-	motion = util.cartesian_to_isometric(motion)
-	var collision = self.move_and_collide(motion)
+	motion = util.cartesian_to_isometric(direction * SPEED * delta)
+	collision = self.move_and_collide(motion)
 	if (collision && collision.collider.is_in_group("enemies")):
 		take_damage()
 

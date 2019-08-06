@@ -17,6 +17,7 @@ var deathAnimation = load("res://assets/spriteFrames/enemies/skeleton/skeletonDe
 var direction
 var hp = 2
 var timmy
+var motion
 
 var speed = SPEED * 4
 
@@ -25,15 +26,21 @@ func _ready():
 		currentState = STATE.TITLE
 		speed = SPEED * 3
 	else:
-		timmy = get_parent().get_node("timmy")
+		timmy = get_parent().get_node("navi").get_node("timmy")
 	animations.playing = true
 	set_physics_process(true)
 
 func _physics_process(delta):
+	if currentState == STATE.TITLE:
+		motion = self.direction.normalized() * speed * delta
+	else:
+		motion = util.cartesian_to_isometric(self.direction.normalized() * speed * delta)
+
 	if self.global_position.x > get_parent().get_viewport().size.x + 32:
 		self.queue_free()
+
 	if currentState == STATE.ALIVE || currentState == STATE.TITLE:
-		self.move_and_collide(self.direction.normalized() * speed * delta)
+		self.move_and_collide(motion)
 	elif currentState == STATE.FOLLOW:
 		if self.global_position.y < timmy.position.y:
 			self.direction.y = 1
@@ -49,7 +56,7 @@ func _physics_process(delta):
 			animations.flip_h = true
 			self.direction.x = -1
 
-		self.move_and_collide(self.direction.normalized() * speed * delta)
+		self.move_and_collide(motion)
 
 func can_hit_timmy():
 	if animations.flip_h:

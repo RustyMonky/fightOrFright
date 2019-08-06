@@ -1,7 +1,6 @@
 extends CanvasLayer
 
 onready var anim = $anim
-onready var color = $color
 
 var scenePath
 

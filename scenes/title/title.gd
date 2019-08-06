@@ -7,7 +7,6 @@ onready var credits = $credits
 onready var effectAudio = $effectAudio
 onready var help = $help
 onready var optionLabels = $optionsVBox.get_children()
-onready var spawner = $spawner
 
 var currentOption
 
@@ -41,6 +40,7 @@ func _input(event):
 		else:
 			currentOption = OPTIONS.QUIT
 		updateHoveredOption()
+
 	elif event.is_action_pressed("ui_up"):
 		if currentOption == OPTIONS.HELP:
 			currentOption = OPTIONS.PLAY

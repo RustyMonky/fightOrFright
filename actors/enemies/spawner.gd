@@ -32,14 +32,17 @@ func _on_spawnTimer_timeout():
 
 	# Determine side of the screen
 	var sideId = randi() % 2
+
 	if sideId == 0 || currentMode == STATE.TITLE:
 		enemy.position = Vector2(-32, spawnHeight)
 		enemy.direction = Vector2(1, 0)
+		get_parent().add_child(enemy)
 	else:
 		enemy.position = Vector2(viewport.size.x + 32, spawnHeight)
 		enemy.direction = Vector2(-1, 0)
 		enemy.get_node("animations").flip_h = true
-	get_parent().add_child(enemy) # Assumes parent is level scene!
+		get_parent().get_node("navi").add_child(enemy) # Assumes parent is level scene!
+
 	enemy.speed += (8 * spawnSpeedLevel)
 	
 func _on_changeTimer_timeout():
