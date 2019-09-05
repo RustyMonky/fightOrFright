@@ -11,15 +11,16 @@ var spawnHeight
 var spawnSpeedLevel = 1
 
 func _ready():
-	if get_parent().has_node("timmy"):
+	spawnTimer.set_wait_time(2)
+
+	if get_parent().has_node("navi"):
 		currentMode = STATE.MAIN
 	else:
 		currentMode = STATE.TITLE
-		spawnTimer.set_wait_time(2)
 		spawnTimer.set_autostart(false)
 
 func _on_spawnTimer_timeout():
-	if get_tree().get_nodes_in_group("enemies").size() >= 20:
+	if get_tree().get_nodes_in_group("enemies").size() >= 1: # Set to 20, then test
 		return
 
 	randomize()
@@ -41,7 +42,7 @@ func _on_spawnTimer_timeout():
 		enemy.position = Vector2(viewport.size.x + 32, spawnHeight)
 		enemy.direction = Vector2(-1, 0)
 		enemy.get_node("animations").flip_h = true
-		get_parent().get_node("navi").add_child(enemy) # Assumes parent is level scene!
+		get_parent().get_node("navi").add_child(enemy) # Assumes parent is navigational 2D node
 
 	enemy.speed += (8 * spawnSpeedLevel)
 	

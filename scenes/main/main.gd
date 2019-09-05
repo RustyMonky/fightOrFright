@@ -1,13 +1,9 @@
 extends Node2D
 
-onready var timmy = $navi/timmy
 onready var audio = $backgroundMusic
+onready var timmy = $navi/timmy
 
 var hasGameover = false
-
-func _on_triggerZone_body_entered(body):
-	if body.is_in_group("enemies"):
-		body.move_to_timmy()
 
 func _on_gameTime_timeout():
 	if timmy.currentState != timmy.STATE.DEAD:

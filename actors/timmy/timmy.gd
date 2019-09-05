@@ -17,17 +17,23 @@ onready var invincibleTimer = $invincibleTimer
 onready var light = $light
 onready var lightTween = $lightTween
 onready var pistolSound = load("res://assets/sounds/effects/pistol.wav")
+onready var tilemap = get_parent().get_node("tilemap") # Assumes is child of a Navigational2D that contains a tilemap
 
 var collision
+var currentCell
 var currentState = STATE.REST
 var direction = Vector2(0, 0)
 var fear = 0
 var isInvincible = false
 var motion
+var nextCell
 
 func _ready():
 	set_process(true)
 	set_process_input(true)
+
+	# Center Timmy upon spawn in the middle of the tilemap
+	self.global_position = tilemap.map_to_world(Vector2(8, 1))
 
 func _process(delta):
 	if currentState == STATE.DEAD:
@@ -84,37 +90,36 @@ func fire():
 
 	# Unfortunately, bullet position is hard set so that it exits the gun sprite
 	if (!animations.flip_h):
-		bulletInstance.direction = Vector2(0, 0)
-		bulletInstance.position = self.position + Vector2(-14, 16)
+		bulletInstance.position = self.position + Vector2(-14, -16)
 	else:
-		bulletInstance.direction = RIGHT
-		bulletInstance.position = self.position + Vector2(14, 16)
+		bulletInstance.position = self.position + Vector2(14, -16)
+
+	bulletInstance.direction = self.direction
 	get_parent().add_child(bulletInstance)
+
 	audio.set_stream(pistolSound)
 	audio.play()
 
 func move_timmy(delta):
 	currentState = STATE.MOVING
 
-	if self.global_position.y + 32 > 360 && self.direction.y == 1:
-		self.direction.y = 0
-	elif self.global_position.y - 32 < 0 && self.direction.y == -1:
-		self.direction.y = 0
-
-	if self.global_position.x - 16 < 0 && self.direction.x == -1:
-		self.direction.x = 0
-	elif self.global_position.x + 16 > 640 && self.direction.x == 1:
-		self.direction.x = 0
-
+	# Determines direction of movement according to isometric perspective
 	motion = util.cartesian_to_isometric(direction * SPEED * delta)
+
+	# Determines if the tile map is using the destination cell before processing movement
+	currentCell = tilemap.world_to_map(self.global_position)
+	nextCell = tilemap.world_to_map(self.global_position + motion)
+	if !tilemap.get_used_cells().has(nextCell):
+		return
+
 	collision = self.move_and_collide(motion)
 	if (collision && collision.collider.is_in_group("enemies")):
 		take_damage()
 
 	# Check change in direction to update animation flip
-	if direction.x == 1:
+	if direction.x == 1 || direction.y == -1:
 		animations.flip_h = true
-	elif direction.x == -1:
+	elif direction.x == -1 || direction.y == 1:
 		animations.flip_h = false
 
 	animations.play()

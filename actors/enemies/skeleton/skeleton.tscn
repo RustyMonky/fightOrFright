@@ -30,6 +30,10 @@ one_shot = true
 occluder = SubResource( 1 )
 
 [node name="audio" type="AudioStreamPlayer" parent="."]
+
+[node name="ray" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 0, 0 )
 [connection signal="animation_finished" from="animations" to="." method="_on_animations_animation_finished" flags=3]
 [connection signal="timeout" from="fadeTimer" to="." method="_on_fadeTimer_timeout"]
 [connection signal="tween_completed" from="fadeTween" to="." method="_on_fadeTween_tween_completed"]

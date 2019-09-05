@@ -6,22 +6,27 @@ onready var timmy = get_parent().get_node("timmy")
 
 var bulletChange
 var direction
+var fearFloat
+
+const UP = Vector2(0, -1)
+const DOWN = Vector2(0, 1)
+const LEFT = Vector2(-1, 0)
+const RIGHT = Vector2(1, 0)
 
 const SPEED = 400
 
 func _ready():
 	randomize()
-	var fearFloat = float(timmy.fear * 0.01)
+	fearFloat = float(timmy.fear * 0.01)
 	bulletChange = rand_range(-fearFloat, fearFloat)
 
 	sprite.set_texture(horizontalTexture)
-	if self.direction.y == 0:
-		if self.direction.x == 1:
-			sprite.flip_h = true
 
-	elif self.direction.x == 0:
-		if self.direction.y == 1:
-			sprite.flip_v = true
+	if self.direction == RIGHT || self.direction == UP:
+		sprite.flip_h = true
+
+	if self.direction == LEFT || self.direction == DOWN:
+		sprite.flip_v = true
 
 	set_physics_process(true)
 
@@ -30,7 +35,7 @@ func _physics_process(delta):
 		self.direction = Vector2(-1, 0) # Unfortunately, required override for bullet spawn if player doesn't move
 
 	# Lastly, update bullet direction with fear
-	self.direction.y = bulletChange
+	# TODO: Update based on fear
 
 	var motion = (self.direction.normalized() * SPEED * delta)
 	self.global_position += util.cartesian_to_isometric(motion)
